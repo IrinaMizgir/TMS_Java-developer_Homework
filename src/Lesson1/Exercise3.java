@@ -1,3 +1,5 @@
+package Lesson1;
+
 public class Exercise3 {
     public static void main(String[] args) {
         //В переменной n хранится трёхзначное число. Создайте программу, вычисляющую и

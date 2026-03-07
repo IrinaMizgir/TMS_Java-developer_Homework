@@ -1,3 +1,5 @@
+package Lesson1;
+
 public class Exercise4 {
     public static void main(String[] args) {
         //В переменной n хранится вещественное число с ненулевой дробной частью. Создайте
