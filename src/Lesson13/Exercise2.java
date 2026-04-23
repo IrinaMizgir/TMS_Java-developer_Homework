@@ -11,9 +11,10 @@ public class Exercise2 {
 
     public static void main(String[] args) {
         try {
-            System.exit(0); // завершает работу JVM
+            throw new RuntimeException();
         } catch (RuntimeException runtimeException) {
             System.out.println("Catch block");
+            System.exit(0); // завершает работу JVM
         } finally {
             System.out.println("Block finally");
         }
