@@ -1,16 +1,21 @@
 package project.service;
 
+import project.exceptions.DataBaseUpdateException;
 import project.model.DatePeriod;
 import project.model.Transfer;
 import project.model.TransferResult;
 import project.util.ConsoleUtils;
 import project.util.FileUtils;
+import project.util.JDBCUtils;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -101,6 +106,24 @@ public class ReportService {
 
         Path reportUserDataPath = workingDirPath.resolve(REPORT_FILENAME);
         FileUtils.appendAllLinesToPath(reportUserDataPath, serializedReportResults);
+        System.out.println("Файл отчёта успешно сохранён");
+
+        int [] dataBaseResult = JDBCUtils.executeBatchUpdate("INSERT INTO report (time, file_name, transfer, status) VALUES (?,?,?,?)",
+                preparedStatement -> transferResults.forEach(transferResult -> {
+                    try {
+                        Transfer transfer = transferResult.transfer();
+                        preparedStatement.setTimestamp(1, Timestamp.valueOf(transfer.getDate()));
+                        preparedStatement.setString(2, transfer.getFileName());
+                        preparedStatement.setString(3, getAccountTransferMessage(transfer));
+                        preparedStatement.setString(4, getTransferStatusMessage(transferResult.transferResultStatusInfos()));
+                        preparedStatement.addBatch();
+                    } catch (SQLException exception) {
+                        throw new DataBaseUpdateException("Ошибка при добавлении данных о файле отчёте ",exception);
+                    }
+                }));
+        System.out.println("Данные отчёта успешно сохранены в базу данных: " + Arrays.toString(dataBaseResult));
+
+
         ConsoleUtils.printPath("Данные отчёта: ", reportUserDataPath);
     }
 

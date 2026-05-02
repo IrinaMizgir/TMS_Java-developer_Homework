@@ -1,6 +1,7 @@
 package project.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Класс для перевода.
@@ -12,7 +13,7 @@ public class Transfer {
     /**
      * Дата перевода.
      */
-    private final LocalDateTime date = LocalDateTime.now();
+    private final LocalDateTime date = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
     /**
      * Номер счета с.
      */
