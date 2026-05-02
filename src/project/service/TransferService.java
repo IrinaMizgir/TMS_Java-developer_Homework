@@ -13,13 +13,15 @@ import project.util.ConsoleUtils;
 import project.util.FileUtils;
 import project.util.JDBCUtils;
 
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -76,17 +78,17 @@ public class TransferService {
         FileUtils.writeAllLinesToPath(accountsUserDataPath, lines);
         System.out.println("Первоначальные данные успешно сохранены в рабочий файл");
         Map<String, Account> dataMap = parseAccountsFromLines(lines);
-        int [] dataBaseResult = JDBCUtils.executeBatchUpdate("INSERT INTO accounts (number, sum) VALUES (?,?)", preparedStatement ->
+        JDBCUtils.executeBatchUpdate("INSERT INTO accounts (number, sum) VALUES (?,?)", preparedStatement ->
                 dataMap.values().forEach(account -> {
-            try {
-                preparedStatement.setString(1,account.getNumber());
-                preparedStatement.setDouble(2, account.getBalance());
-                preparedStatement.addBatch();
-            } catch (SQLException exception) {
-                throw new DataBaseUpdateException("Ошибка при добавлении первоначальных данных о счетах ",exception);
-            }
-        }));
-        System.out.println("Первоначальные данные успешно сохранены в базу данных: " + Arrays.toString(dataBaseResult));
+                    try {
+                        preparedStatement.setString(1, account.getNumber());
+                        preparedStatement.setDouble(2, account.getBalance());
+                        preparedStatement.addBatch();
+                    } catch (SQLException exception) {
+                        throw new DataBaseUpdateException("Ошибка при добавлении первоначальных данных о счетах ", exception);
+                    }
+                }));
+        System.out.println("Первоначальные данные успешно сохранены в базу данных");
 
         return dataMap;
     }
@@ -186,17 +188,17 @@ public class TransferService {
         Path accountsUserDataPath = workingDirPath.resolve(ACCOUNTS_FILENAME);
         FileUtils.writeAllLinesToPath(accountsUserDataPath, serializedAccounts);
         System.out.println("Данные счетов успешно сохранены в рабочий файл");
-       int[] dataBaseResult = JDBCUtils.executeBatchUpdate("UPDATE accounts SET sum = ? WHERE number = ?", preparedStatement ->
+        JDBCUtils.executeBatchUpdate("UPDATE accounts SET sum = ? WHERE number = ?", preparedStatement ->
                 accounts.values().forEach(account -> {
                     try {
                         preparedStatement.setDouble(1, account.getBalance());
-                        preparedStatement.setString(2,account.getNumber());
+                        preparedStatement.setString(2, account.getNumber());
                         preparedStatement.addBatch();
                     } catch (SQLException exception) {
-                        throw new DataBaseUpdateException("Ошибка при обновлении данных о счетах ",exception);
+                        throw new DataBaseUpdateException("Ошибка при обновлении данных о счетах ", exception);
                     }
                 }));
-        System.out.println("Данные счетов успешно обновлены в базе данных: " + Arrays.toString(dataBaseResult));
+        System.out.println("Данные счетов успешно обновлены в базе данных");
         ConsoleUtils.printPath("Актуальные данные счетов: ", accountsUserDataPath);
 
         return results;

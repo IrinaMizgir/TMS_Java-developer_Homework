@@ -15,7 +15,6 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,8 +58,8 @@ public class ReportService {
      * Печатает отчёт за период.
      */
     public void printReportByPeriod() {
-        LocalDate start = ConsoleUtils.getLocalDate("Введите дату начала отчета: ");
-        LocalDate finish = ConsoleUtils.getLocalDate("Введите дату окончания отчета: ");
+        LocalDate start = ConsoleUtils.getLocalDate("Введите дату начала отчета");
+        LocalDate finish = ConsoleUtils.getLocalDate("Введите дату окончания отчета");
         if (start.isAfter(finish)) {
             System.out.println("Неверный период.");
             return;
@@ -108,7 +107,7 @@ public class ReportService {
         FileUtils.appendAllLinesToPath(reportUserDataPath, serializedReportResults);
         System.out.println("Файл отчёта успешно сохранён");
 
-        int [] dataBaseResult = JDBCUtils.executeBatchUpdate("INSERT INTO report (time, file_name, transfer, status) VALUES (?,?,?,?)",
+        JDBCUtils.executeBatchUpdate("INSERT INTO report (time, file_name, transfer, status) VALUES (?,?,?,?)",
                 preparedStatement -> transferResults.forEach(transferResult -> {
                     try {
                         Transfer transfer = transferResult.transfer();
@@ -121,7 +120,7 @@ public class ReportService {
                         throw new DataBaseUpdateException("Ошибка при добавлении данных о файле отчёте ",exception);
                     }
                 }));
-        System.out.println("Данные отчёта успешно сохранены в базу данных: " + Arrays.toString(dataBaseResult));
+        System.out.println("Данные отчёта успешно сохранены в базу данных");
 
 
         ConsoleUtils.printPath("Данные отчёта: ", reportUserDataPath);

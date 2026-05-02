@@ -92,11 +92,11 @@ public final class ConsoleUtils {
     /**
      * Возращает дату.
      *
-     * @param message Сообщение.
+     * @param prefix Префикс сообщения.
      * @return Дата.
      */
-    public static LocalDate getLocalDate(String message) {
-        System.out.println(message);
+    public static LocalDate getLocalDate(String prefix) {
+        System.out.println(prefix + " в формате (YYYY-MM-DD):");
         while (SCANNER.hasNextLine()) {
             try {
                 return LocalDate.parse(SCANNER.nextLine());

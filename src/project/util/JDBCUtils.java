@@ -1,6 +1,11 @@
 package project.util;
 
-import java.sql.*;
+import project.exceptions.DataBaseAccessException;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.function.Consumer;
 
 /**
@@ -32,17 +37,16 @@ public final class JDBCUtils {
      *
      * @param statementConsumer Потребитель запросов.
      * @param query Запрос.
-     * @return Количество затронутых строк.
      */
-    public static int[] executeBatchUpdate(String query, Consumer<PreparedStatement> statementConsumer) {
+    public static void executeBatchUpdate(String query, Consumer<PreparedStatement> statementConsumer) {
         try (Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD)) {
             //noinspection SqlSourceToSinkFlow
             try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
                 statementConsumer.accept(preparedStatement);
-                return preparedStatement.executeBatch();
+                preparedStatement.executeBatch();
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            throw new DataBaseAccessException("Ошибка доступа к базе данных", exception);
         }
     }
 }

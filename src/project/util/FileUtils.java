@@ -4,11 +4,8 @@ import project.MainRunner;
 import project.exceptions.ClassPathResourceNotFound;
 import project.model.TextFileInfo;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -37,11 +34,16 @@ public final class FileUtils {
      * @return Список строк (линий).
      */
     public static List<String> loadClassPathResourceAsLinesList(String fileName) {
-        URL textURLResource = MainRunner.class.getClassLoader().getResource(File.separatorChar + "project" + File.separatorChar + fileName);
-        Objects.requireNonNull(textURLResource, () -> "Не найден файл %s в пути к классам ".formatted(fileName));
-        try {
-            return readAllLinesFromPath(Path.of(textURLResource.toURI()));
-        } catch (URISyntaxException | UncheckedIOException exception) {
+        String path = MainRunner.class.getPackageName() + "/" + fileName;
+        try (InputStream classPathResourceInputStream = MainRunner.class.getClassLoader().getResourceAsStream(path);
+             var inputStreamReader = new InputStreamReader(
+                     Objects.requireNonNull(classPathResourceInputStream, () -> "Не найден файл %s в пути к классам ".formatted(fileName)),
+                     StandardCharsets.UTF_8);
+
+             var bufferedReader = new BufferedReader(inputStreamReader)) {
+
+            return bufferedReader.lines().toList();
+        } catch (IOException exception) {
             throw new ClassPathResourceNotFound(exception);
         }
     }
@@ -118,6 +120,7 @@ public final class FileUtils {
 
     /**
      * Переносит файл в папку.
+     *
      * @param source Путь источника.
      * @param destination Путь назначения.
      */
@@ -132,6 +135,7 @@ public final class FileUtils {
 
     /**
      * Запись линий во временный файл.
+     *
      * @param prefix Префикс файла.
      * @param lines Список линий.
      * @return Путь к временному файлу.

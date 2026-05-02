@@ -40,8 +40,8 @@ public class TransferApplication implements Runnable {
     public void run() {
         boolean flag = true;
         while (flag) {
-            RunType type = ConsoleUtils.getFromString("Выберите операцию: 1 – парсинг, 2 – отчет, " +
-                    "3 – отчет за период, q – выход.", RunType::fromCode);
+            RunType type = ConsoleUtils.getFromString("Выберите операцию: 1 - парсинг, 2 - отчёт, " +
+                    "3 - отчёт за период, q - выход.", RunType::fromCode);
             switch (type) {
                 case TRANSFER -> transfer();
                 case REPORT -> reportService.printReport();

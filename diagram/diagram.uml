@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/Irina/IdeaProjects/TMS/TMS_Java-developer_Homework/src</OriginalElement>
+  <nodes>
+    <node x="1121.8571364763727" y="1106.401713910448">project.exceptions.ClassPathResourceNotFound</node>
+    <node x="-97.82777605143407" y="1208.7308710501225">project.application.TransferApplication</node>
+    <node x="175.0508129886722" y="526.1511857953155">project.model.TransferResult.TransferResultStatusInfo.TransferStatus</node>
+    <node x="255.3601919085263" y="1444.7770441520286">project.MainRunner</node>
+    <node x="-128.70877398801736" y="835.0537411798683">project.model.Account</node>
+    <node x="1213.8056482310967" y="712.0262204286671">project.model.DatePeriod</node>
+    <node x="656.8135640560997" y="1260.543301725965">project.util.JDBCUtils</node>
+    <node x="78.00617558000933" y="858.1020573293184">project.exceptions.AccountsNotFoundException</node>
+    <node x="793.3595903734592" y="952.7185870793514">project.service.ReportService</node>
+    <node x="423.13400656322614" y="878.9374271005047">project.exceptions.InvalidAccountDataException</node>
+    <node x="576.4045687507967" y="1130.2799467529874">project.exceptions.DataBaseAccessException</node>
+    <node x="245.7794322425252" y="967.9164641897205">project.service.TransferService</node>
+    <node x="-129.69079411466248" y="639.0978455090496">project.model.TransferResult.TransferResultStatusInfo</node>
+    <node x="474.75396866625465" y="722.4238361962999">project.model.TransferResult</node>
+    <node x="894.0208548594026" y="1148.8006454108634">project.model.TextFileInfo</node>
+    <node x="410.0887821941704" y="1220.878683095389">project.application.TransferApplication.RunType</node>
+    <node x="926.6868293086819" y="751.9238361962999">project.exceptions.DataBaseUpdateException</node>
+    <node x="880.5418202069671" y="1341.2806049861133">project.util.FileUtils</node>
+    <node x="697.8450655399987" y="502.22623812119264">project.model.Transfer</node>
+    <node x="529.7600403060203" y="1441.263692431881">project.util.ConsoleUtils</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="project.model.TransferResult.TransferResultStatusInfo.TransferStatus" target="project.model.TransferResult.TransferResultStatusInfo" relationship="INNER_CLASS">
+      <point x="-119.5" y="40.94665971373411" />
+      <point x="121.5" y="0.0" />
+    </edge>
+    <edge source="project.service.TransferService" target="project.model.Account" relationship="TO_MANY">
+      <point x="-125.5" y="-15.0" />
+      <point x="-57.208773988017356" y="1032.4164641897205" />
+      <point x="0.0" y="43.5" />
+    </edge>
+    <edge source="project.util.FileUtils" target="project.exceptions.ClassPathResourceNotFound" relationship="CREATE">
+      <point x="56.0" y="0.0" />
+      <point x="1259.8571364763727" y="1355.2806049861133" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="project.model.TransferResult.TransferResultStatusInfo" target="project.model.TransferResult.TransferResultStatusInfo.TransferStatus" relationship="TO_ONE">
+      <point x="121.5" y="15.0" />
+      <point x="-119.5" y="55.94665971373411" />
+    </edge>
+    <edge source="project.model.TransferResult.TransferResultStatusInfo" target="project.model.TransferResult" relationship="INNER_CLASS">
+      <point x="0.0" y="43.5" />
+      <point x="-8.19079411466248" y="774.6511857953155" />
+      <point x="-204.0" y="8.72734959901561" />
+    </edge>
+    <edge source="project.application.TransferApplication" target="project.service.TransferService" relationship="CREATE">
+      <point x="116.00000000000001" y="-43.5" />
+      <point x="141.67222394856594" y="1157.3900473393733" />
+      <point x="336.4548326442182" y="1157.3900473393733" />
+      <point x="-34.82459959830706" y="79.5" />
+    </edge>
+    <edge source="project.service.ReportService" target="project.exceptions.DataBaseUpdateException" relationship="CREATE">
+      <point x="4.096265407724786E-4" y="-55.499587079351386" />
+      <point x="924.36" y="930.0" />
+      <point x="1055.1868293086818" y="930.0" />
+      <point x="1055.1868293086818" y="848.498111040956" />
+      <point x="1055.1871159420289" y="848.498111040956" />
+      <point x="2.866333470592508E-4" y="13.999922117496226" />
+    </edge>
+    <edge source="project.service.TransferService" target="project.model.TransferResult.TransferResultStatusInfo" relationship="CREATE">
+      <point x="-125.5" y="0.0" />
+      <point x="-147.19079411466248" y="1047.4164641897205" />
+      <point x="-147.19079411466248" y="682.5978455090496" />
+      <point x="-121.5" y="0.0" />
+    </edge>
+    <edge source="project.service.TransferService" target="project.exceptions.AccountsNotFoundException" relationship="CREATE">
+      <point x="-23.773256662515877" y="-79.5" />
+      <point x="131.0" y="14.0" />
+    </edge>
+    <edge source="project.service.ReportService" target="project.model.DatePeriod" relationship="CREATE">
+      <point x="131.0" y="-15.0" />
+      <point x="1299.3056482310967" y="993.2185870793514" />
+      <point x="0.0" y="43.5" />
+    </edge>
+    <edge source="project.service.TransferService" target="project.model.Transfer" relationship="CREATE">
+      <point x="-125.5" y="15.0" />
+      <point x="-162.19079411466248" y="1062.4164641897205" />
+      <point x="-162.19079411466248" y="508.65118579531554" />
+      <point x="-110.0" y="-73.0750523258771" />
+    </edge>
+    <edge source="project.application.TransferApplication" target="project.service.ReportService" relationship="TO_ONE">
+      <point x="0.0" y="43.5" />
+      <point x="25.67222394856593" y="1521.763692431881" />
+      <point x="863.0418202069671" y="1521.763692431881" />
+      <point x="-61.317770166492096" y="55.5" />
+    </edge>
+    <edge source="project.service.TransferService" target="project.model.TransferResult" relationship="CREATE">
+      <point x="125.50000000000003" y="0.0" />
+      <point x="717.6340065632262" y="1047.4164641897205" />
+      <point x="38.880037896971544" y="43.5" />
+    </edge>
+    <edge source="project.application.TransferApplication" target="project.service.ReportService" relationship="CREATE">
+      <point x="123.50000000000001" y="-27.984947393636958" />
+      <point x="529.2794322425252" y="1224.2459236564855" />
+      <point x="529.2794322425252" y="1062.4164641897205" />
+      <point x="-131.0" y="54.19787711036906" />
+    </edge>
+    <edge source="project.service.TransferService" target="project.exceptions.DataBaseUpdateException" relationship="CREATE">
+      <point x="-4.3224252519280526E-4" y="-79.50046418972045" />
+      <point x="371.279" y="866.3212116378256" />
+      <point x="1055.1871159420289" y="866.3212116378256" />
+      <point x="2.866333470592508E-4" y="13.999922117496226" />
+    </edge>
+    <edge source="project.application.TransferApplication" target="project.service.TransferService" relationship="TO_ONE">
+      <point x="32.824599598307074" y="-43.5" />
+      <point x="58.496823546873" y="1157.3900473393733" />
+      <point x="253.27943224252522" y="1157.3900473393733" />
+      <point x="-118.0" y="79.5" />
+    </edge>
+    <edge source="project.model.TransferResult" target="project.model.Transfer" relationship="TO_ONE">
+      <point x="129.09109687374405" y="-43.5" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="project.util.JDBCUtils" target="project.exceptions.DataBaseAccessException" relationship="CREATE">
+      <point x="-32.40899530530305" y="-55.5" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="project.util.FileUtils" target="project.model.TextFileInfo" relationship="CREATE">
+      <point x="36.479034652435416" y="-14.0" />
+      <point x="0.0" y="43.5" />
+    </edge>
+    <edge source="project.service.TransferService" target="project.exceptions.InvalidAccountDataException" relationship="CREATE">
+      <point x="59.35457432070095" y="-79.5" />
+      <point x="-131.0" y="14.0" />
+    </edge>
+    <edge source="project.application.TransferApplication.RunType" target="project.application.TransferApplication" relationship="INNER_CLASS">
+      <point x="-88.5" y="-69.01505260636304" />
+      <point x="377.02180741919426" y="1231.363630489026" />
+      <point x="377.02180741919426" y="1252.2308710501225" />
+      <point x="123.50000000000001" y="0.0" />
+    </edge>
+    <edge source="project.MainRunner" target="project.application.TransferApplication" relationship="CREATE">
+      <point x="0.0" y="-14.0" />
+      <point x="325.8601919085263" y="1359.8203373205274" />
+      <point x="131.07758321287412" y="1359.8203373205274" />
+      <point x="105.40535926430819" y="43.5" />
+    </edge>
+    <edge source="project.service.TransferService" target="project.model.Account" relationship="CREATE">
+      <point x="-125.5" y="-30.0" />
+      <point x="-42.208773988017356" y="1017.4164641897205" />
+      <point x="15.0" y="43.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.8625" showDependencies="true" x="627.5" y="1022.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
