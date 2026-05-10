@@ -185,6 +185,7 @@ public class TransferService {
         List<String> serializedAccounts = accounts.values().stream()
                 .map(this::serializeAccountToString)
                 .toList();
+
         Path accountsUserDataPath = workingDirPath.resolve(ACCOUNTS_FILENAME);
         FileUtils.writeAllLinesToPath(accountsUserDataPath, serializedAccounts);
         System.out.println("Данные счетов успешно сохранены в рабочий файл");

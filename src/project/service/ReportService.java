@@ -33,9 +33,9 @@ public class ReportService {
     private static final String REPORT_FILENAME = "report.txt";
 
     /**
-     * Префикс временного файла отчёта.
+     * Префикс временного файла отчёта за период.
      */
-    private static final String TEMP_REPORT_FILE_PREFIX = "report_";
+    private static final String TEMP_REPORT_BY_PERIOD_FILE_PREFIX = "report_by_period_";
 
     /**
      * Путь к рабочей папке.
@@ -78,7 +78,7 @@ public class ReportService {
             System.out.printf("Нет данных для отчета за период с %s по %s %n", start, finish);
             return;
         }
-        Path tempReportFilePath = FileUtils.writeLinesToTempTextFile(TEMP_REPORT_FILE_PREFIX, linesByPeriod);
+        Path tempReportFilePath = FileUtils.writeLinesToTempTextFile(TEMP_REPORT_BY_PERIOD_FILE_PREFIX, linesByPeriod);
         ConsoleUtils.printPath("Данные отчета с %s по %s ".formatted(start, finish), tempReportFilePath);
     }
 
