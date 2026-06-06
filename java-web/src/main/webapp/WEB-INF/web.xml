@@ -10,8 +10,7 @@
     <!-- Регистрация сервлета -->
     <servlet>
         <servlet-name>MinskTimeServlet</servlet-name>
-        <servlet-class>by.tms.lesson24.exercise1.MinskTimeServlet</servlet-class>
-
+        <servlet-class>by.tms.lesson24.exercise1.ZonedTimeServlet</servlet-class>
     </servlet>
 
     <!-- Маппинг сервлета на URL -->
